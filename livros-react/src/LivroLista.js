@@ -1,16 +1,12 @@
 import { useState, useEffect } from 'react';
 
-// a) Fiz o instaciamento direto no controle.
 import { controleEditora } from './controle/ControleEditora';
 import { controleLivro } from './controle/ControleLivros';
 
 
-// b)
 const LinhaLivro = ({ livro, excluir }) => {
-  // c) Invocar o método getNomeEditora
   const nomeEditora = controleEditora.getNomeEditora(livro.codEditora);
 
-  // d) Retorno do componente
   return (
     <tr>
       <td>
@@ -30,13 +26,10 @@ const LinhaLivro = ({ livro, excluir }) => {
   );
 };
 
-// Definir o componente LivroLista
 const LivroLista = () => {
-  // h) Definir propriedades livros e carregado
   const [livros, setLivros] = useState([]);
   const [carregado, setCarregado] = useState(false);
 
-  // i) Utilizar useEffect para carregar livros
   useEffect(() => {
     const carregarLivros = async () => {
       const livrosCarregados = controleLivro.obterLivros();
@@ -45,15 +38,13 @@ const LivroLista = () => {
     };
 
     carregarLivros();
-  }, [carregado]); // O useEffect será acionado sempre que 'carregado' mudar
+  }, [carregado]);
 
-  // j) Método excluir
   const excluir = (codigoLivro) => {
     controleLivro.excluir(codigoLivro);
-    setCarregado(false); // Força o redesenho da página após a exclusão
+    setCarregado(false); 
   };
 
-  // k) Retorno do componente
   return (
     <main>
       <h1>Lista de Livros</h1>
@@ -67,7 +58,6 @@ const LivroLista = () => {
           </tr>
         </thead>
         <tbody>
-          {/* l) Utilizar o método map para gerar linhas como componentes LinhaLivro */}
           {livros.map((livro) => (
             <LinhaLivro key={livro.codigo} livro={livro} excluir={excluir} />
           ))}

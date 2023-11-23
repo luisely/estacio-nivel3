@@ -87,8 +87,8 @@ const LivroLista: NextPage = () => {
       <main>
         <h1>Página de Livros</h1>
         {carregado ? (
-          <table>
-            <thead>
+          <table className="table table-striped table-hover">
+            <thead className="table-dark">
               <tr>
                 <th>Código</th>
                 <th>Título</th>
